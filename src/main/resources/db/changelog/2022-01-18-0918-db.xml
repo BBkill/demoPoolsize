@@ -1,0 +1,50 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="DucDo" id="20220106-1030">
+        <createTable tableName="user">
+            <column name="user_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_user_id" nullable="false"/>
+            </column>
+            <column name="fullname" type="varchar(255)"/>
+            <column name="image" type="varchar(255)"/>
+            <column name="address" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="product">
+            <column name="product_id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk_pro_id" nullable="true"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="price" type="bigint"/>
+            <column name="image" type="varchar(255)"/>
+            <column name="color" type="varchar(255)"/>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+        
+        <createTable tableName="category">
+            <column name="category_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_category_id" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+        
+        <createTable tableName="product_category">
+            <column name="product_id" type="bigint">
+                <constraints foreignKeyName="pk_product_id" references="product(product_id)"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints foreignKeyName="pk_category_id" references="category(category_id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
